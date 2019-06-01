@@ -1,7 +1,7 @@
 def merge_sort(alist):
     """
     Complexity: O(n*log n)
-    Memory: additional for 2 sublist
+    Memory: additional for 2 sublist = O(n)
     """
     print("Splitting ", alist)
     if len(alist) > 1:

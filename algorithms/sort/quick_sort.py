@@ -8,78 +8,38 @@ Memory: without additional memory
 """
 
 
-def partition(alist, p, r):
+def partition(array, first=None, last=None):
     """Find index of split point.
 
     Complexity: O(n)
 
-    :param alist: list with numbers
-    :param p: first element index
-    :param r: last element index
+    :param array: list with numbers
+    :param first: start index of array
+    :param last: last index of array
     :return: index of split point
     """
-    x = alist[p]
-    i = p
-    j = r
+    x = array[first]
+    i = first + 1
+    j = last
     while True:
-        while i < j and alist[j] >= x:
-            j -= 1
-        while i < j and alist[i] < x:
+        while i <= j and array[i] <= x:
             i += 1
-        if i < j:
-            alist[i], alist[j] = alist[j], alist[i]
+        while i <= j and array[j] >= x:
+            j -= 1
+        if i <= j:
+            array[i], array[j] = array[j], array[i]
         else:
-            return j
+            break
+
+    array[first], array[j] = array[j], array[first]
+    return j
 
 
-def quick_sort_v1(alist, p, r):
+def quick_sort(alist, p, r):
     """Quick sort."""
     print(alist)
     if p < r:
         q = partition(alist, p, r)
         print(q)
-        quick_sort_v1(alist, p, q)
-        quick_sort_v1(alist, q + 1, r)
-
-
-def get_middle_value(alist, start, end):
-    largest = alist[start]
-    if largest < alist[end]:
-        largest = alist[end]
-    from_middle = alist[(end-start)//2]
-    if largest < from_middle:
-        largest = from_middle
-    return largest
-
-
-def quick_sort_v2(alist, first, last):
-    print(alist)
-    if first < last:
-        q = partion_v2(alist, first, last)
-        quick_sort_v2(alist, first, q-1)
-        quick_sort_v2(alist, q+1, last)
-
-
-def partion_v2(alist, first, last):
-    x = alist[first]
-    i = first + 1
-    j = last
-    while True:
-        while i <= j and alist[i] <= x:
-            i += 1
-        while i <= j and alist[j] >= x:
-            j -= 1
-        if i <= j:
-            alist[i], alist[j] = alist[j], alist[i]
-        else:
-            break
-
-    alist[first], alist[j] = alist[j], alist[first]
-    return j
-
-
-if __name__ == '__main__':
-    import random
-    a = [random.randrange(100) for i in range(20)]
-    quick_sort_v2(a, 0, len(a) - 1)
-    print(a)
+        quick_sort(alist, p, q - 1)
+        quick_sort(alist, q + 1, r)

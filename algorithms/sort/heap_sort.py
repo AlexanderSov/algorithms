@@ -27,7 +27,7 @@ A = [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
 
 
 def parent(i):
-    return (i -1) // 2
+    return (i - 1) // 2
 
 
 def left_child(i):
@@ -38,21 +38,23 @@ def right_child(i):
     return 2 * i + 2
 
 
-def heapify_max(array: list, i, heap_size):
-    """Kepping main heap property (recursive).
+def heapify_max(array: list, index, heap_size):
+    """Keeping main heap property (recursive).
+
+    :param index: vertex index
 
     Complexity: O(log n)
     """
-    left = left_child(i)
-    right = right_child(i)
-    if left < heap_size and array[left] > array[i]:
+    left = left_child(index)
+    right = right_child(index)
+    if left < heap_size and array[left] > array[index]:
         largest = left
     else:
-        largest = i
+        largest = index
     if right < heap_size and array[right] > array[largest]:
         largest = right
-    if largest != i:
-        array[largest], array[i] = array[i], array[largest]
+    if largest != index:
+        array[largest], array[index] = array[index], array[largest]
         heapify_max(array, largest, heap_size)
 
 
