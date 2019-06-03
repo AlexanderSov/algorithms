@@ -32,11 +32,10 @@ class BST:
         node.parent = parent
         if not parent:
             self.root = node
+        elif node.key < parent.key:
+            parent.left = node
         else:
-            if node.key < parent.key:
-                parent.left = node
-            else:
-                parent.right = node
+            parent.right = node
 
     def delete(self, node):
         """Delete existing in BST node.
