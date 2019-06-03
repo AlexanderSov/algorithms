@@ -62,29 +62,22 @@ class BST:
             self.transplant(node, successor)
             successor.left = node.left
             successor.left.parent = successor
-        node.parent, node.left, node.right = None, None, None
 
-    def transplant(self, root, subtree):
+    def transplant(self, node, subtree_root):
         """Function to transplant subtree of inner root to parent.
 
-        Function tacked from Introduction to algorithms 3rd edition.
-        Can be used for tree with one subtree/ deleting element root
-        from tree.
-
-        Function don't clear links in element root.
-
-        :param root: deleting node
-        :param subtree: node that take place of node root
+        :param node: deleting node
+        :param subtree_root: node that take place of node root
         :return:
         """
-        if not root.parent:
-            self.root = subtree
-        elif root.parent.left == root:
-            root.parent.left = subtree
+        if not node.parent:
+            self.root = subtree_root
+        elif node.parent.left == node:
+            node.parent.left = subtree_root
         else:
-            root.parent.right = subtree
-        if subtree:
-            subtree.parent = root.parent
+            node.parent.right = subtree_root
+        if subtree_root:
+            subtree_root.parent = node.parent
 
     def __contains__(self, key):
         raise NotImplementedError
